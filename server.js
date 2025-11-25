@@ -18,9 +18,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 connectDB();
 
+const allowedOrigins = [process.env.CLIENT_URL];
+
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ credentials: true }));
+app.use(cors({ credentials: true, origin: allowedOrigins }));
 // Serve static assets from the client's Vite build output (one level up)
 app.use(express.static(path.join(__dirname, "client", "dist")));
 
